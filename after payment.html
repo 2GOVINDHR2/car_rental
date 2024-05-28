@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Success</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            display: none;
+        }
+        .container h1 {
+            color: #28a745;
+        }
+        .details {
+            margin-top: 20px;
+        }
+        .details p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .details span {
+            font-weight: bold;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .button-container a {
+            display: inline-block;
+            padding: 10px 20px;
+            color: #fff;
+            background: #007bff;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        .button-container a:hover {
+            background: #0056b3;
+        }
+        .loading-circle {
+            margin: 0 auto 20px auto;
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(0, 123, 255, 0.2);
+            border-top: 8px solid #007bff;
+            border-radius: 50%;
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .tick-mark {
+            font-size: 80px;
+            color: #28a745;
+            display: none;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .details p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-circle" id="loadingCircle"></div>
+    <div class="tick-mark" id="tickMark">✔</div>
+    <div class="container" id="successContainer">
+        <h1>Payment Successful!</h1>
+        <div class="details">
+            <p><span><b>Rented based on your selection</b></p>
+            <p><span>Rent Start Time:</span> May 28, 2024, 10:00 AM</p>
+            <p><span>Return Time:</span> June 4, 2024, 10:00 AM</p>
+            <p><span>Total Amount Paid:</span> $1400</p>
+        </div>
+        <div class="button-container">
+            <a href="index.html">Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            document.getElementById('loadingCircle').style.display = 'none';
+            document.getElementById('tickMark').style.display = 'block';
+            document.getElementById('successContainer').style.display = 'block';
+        }, 2000);
+    </script>
+</body>
+</html>
