@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toyota Corolla</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .nav-tabs a {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #007bff;
+            border: 1px solid #ddd;
+            border-radius: 5px 5px 0 0;
+            background: #fff;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        .nav-tabs a.active {
+            border-bottom: 1px solid #fff;
+            background: #f4f4f4;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .car-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .car-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .car-container img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .specs, .features, .reviews {
+            margin-top: 20px;
+        }
+        .specs ul, .features ul, .reviews ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .specs li, .features li, .reviews li {
+            background: #f9f9f9;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .features li {
+            display: flex;
+            align-items: center;
+        }
+        .features li::before {
+            content: "✓";
+            color: green;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .rent-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+            background: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+        .rent-button:hover {
+            background: #0056b3;
+        }
+        .reviews h2 {
+            text-align: center;
+        }
+        .review-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .review-item h3 {
+            margin: 0 0 5px 0;
+        }
+        .review-item p {
+            margin: 0;
+        }
+        .faq-item {
+            margin-bottom: 10px;
+        }
+        .faq-item h3 {
+            margin: 0;
+        }
+        .faq-item p {
+            margin: 5px 0 0 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-tabs">
+        <a class="tab-link active" data-tab="details">Details</a>
+        <a class="tab-link" data-tab="emi-options">EMI Options</a>
+        <a class="tab-link" data-tab="faqs">FAQs</a>
+        <a class="tab-link" data-tab="dealers">Dealers</a>
+    </div>
+
+    <div class="car-container">
+        <h1>Toyota Corolla</h1>
+        <img src="https://www.motortrend.com/uploads/sites/5/2021/04/2021-Toyota-Corolla-Hatchback-XSE-front-three-quarter.jpg?w=768&width=768&q=75&format=webp" alt="Toyota Corolla">
+        
+        <div id="details" class="tab-content active">
+            <h2>Specifications & Features</h2>
+            <div class="specs">
+                <h3>Specifications</h3>
+                <ul>
+                    <li>Engine: 1.8L 4-Cylinder</li>
+                    <li>Horsepower: 139 HP</li>
+                    <li>Transmission: CVT</li>
+                    <li>Fuel Economy: 30 MPG city / 38 MPG highway</li>
+                    <li>Drivetrain: FWD</li>
+                </ul>
+            </div>
+
+            <div class="features">
+                <h3>Features</h3>
+                <ul>
+                    <li>Cloth seats</li>
+                    <li>Power moonroof</li>
+                    <li>Touchscreen infotainment system</li>
+                    <li>Bluetooth connectivity</li>
+                    <li>Backup camera</li>
+                    <li>Automatic climate control</li>
+                    <li>Premium sound system</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="emi-options" class="tab-content">
+            <h2>EMI Options</h2>
+            <ul>
+                <li>12 months: $400/month</li>
+                <li>24 months: $210/month</li>
+                <li>36 months: $150/month</li>
+                <li>48 months: $120/month</li>
+            </ul>
+        </div>
+
+        <div id="faqs" class="tab-content">
+            <h2>FAQs</h2>
+            <div class="faq-item">
+                <h3>What is the warranty period?</h3>
+                <p>The warranty period for the Toyota Corolla is 3 years or 36,000 miles, whichever comes first.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What safety features are included?</h3>
+                <p>The Corolla includes features like adaptive cruise control, lane-keeping assist, and more.</p>
+            </div>
+        </div>
+
+        <div id="dealers" class="tab-content">
+            <h2>Dealers</h2>
+            <ul>
+                <li>Dealer 1: 123 Main Street, City, State</li>
+                <li>Dealer 2: 456 Elm Street, City, State</li>
+                <li>Dealer 3: 789 Oak Street, City, State</li>
+            </ul>
+        </div>
+
+        <a href="#" class="rent-button" id="rentNowButton">Rent Now</a>
+    </div>
+
+    <script>
+        const tabs = document.querySelectorAll('.tab-link');
+        const contents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+
+        document.getElementById('rentNowButton').addEventListener('click', function(event) {
+            event.preventDefault();
+            alert("Thank you for your interest! You will be redirected to the rental page.");
+            window.location.href = "PAYMENT.html";  // Replace with actual rental link
+        });
+    </script>
+</body>
+</html>
