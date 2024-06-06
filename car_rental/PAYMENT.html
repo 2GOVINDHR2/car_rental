@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental Billing Payment System</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6ZbveXM8sFrv6I8HgzqYSLlDTkMhwyBFICA&s') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">PAYMENT FOR YOUR CAR</h2>
+        <form id="billingForm" class="mt-4">
+            <div class="form-group">
+                <label for="customerName">Customer Name:</label>
+                <input type="text" class="form-control" id="customerName" name="customerName" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="carModel">Car Model:</label>
+                <input type="text" class="form-control" id="carModel" name="carModel" required>
+            </div>
+            <div class="form-group">
+                <label for="rentalDays">Rental Days:</label>
+                <input type="number" class="form-control" id="rentalDays" name="rentalDays" required>
+            </div>
+            <div class="form-group">
+                <label for="ratePerDay">Rate per Day:</label>
+                <input type="number" class="form-control" id="ratePerDay" name="ratePerDay" required>
+            </div>
+            <div class="form-group">
+                <label for="totalAmount">Total Amount:</label>
+                <input type="number" class="form-control" id="totalAmount" name="totalAmount" readonly>
+            </div>
+            <div class="form-group">
+                <label for="paymentMethod">Payment Method:</label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="paymentCash" value="Cash" required>
+                        <label class="form-check-label" for="paymentCash">Cash</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="paymentNetBanking" value="Net Banking">
+                        <label class="form-check-label" for="paymentNetBanking">Net Banking</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="paymentCreditCard" value="Credit Card">
+                        <label class="form-check-label" for="paymentCreditCard">Credit Card</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="paymentDebitCard" value="Debit Card">
+                        <label class="form-check-label" for="paymentDebitCard">Debit Card</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" id="netBankingOptions" style="display: none;"action ="/api/bookings" method ="post">
+                <label for="bankName">Select Bank:</label>
+                <select class="form-control" id="bankName" name="bankName">
+                    <option value="">Select Bank</option>
+                    <option value="Bank A">SBI</option>
+                    <option value="Bank B">ICIC</option>
+                    <option value="Bank C">BOB</option>
+                    <option value="Bank C">AXIS BANK</option>
+                    <option value="Bank C">FEDERAL BANK</option>
+                </select>
+            </div>
+            <div class="form-group" id="cardDetails" style="display: none;">
+                <label for="cardNumber">Card Number:</label>
+                <input type="text" class="form-control" id="cardNumber" name="cardNumber">
+                <label for="cardExpiry">Expiry Date:</label>
+                <input type="text" class="form-control" id="cardExpiry" name="cardExpiry" placeholder="MM/YY">
+                <label for="cardCVV">CVV:</label>
+                <input type="text" class="form-control" id="cardCVV" name="cardCVV">
+            </div>
+            <button type="button" class="btn btn-primary" onclick="calculateTotal()">Calculate Total</button>
+            <button type="submit" class="btn btn-success">Submit Payment</button>
+        </form>
+    </div>
+
+    <script>
+        function calculateTotal() {
+            const rentalDays = document.getElementById('rentalDays').value;
+            const ratePerDay = document.getElementById('ratePerDay').value;
+            const totalAmount = rentalDays * ratePerDay * 10;
+            document.getElementById('totalAmount').value = totalAmount;
+        }
+
+        document.getElementById('billingForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const customerName = document.getElementById('customerName').value;
+            const email = document.getElementById('email').value;
+            const carModel = document.getElementById('carModel').value;
+            const rentalDays = document.getElementById('rentalDays').value;
+            const ratePerDay = document.getElementById('ratePerDay').value;
+            const totalAmount = document.getElementById('totalAmount').value;
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            let bankName = '';
+            let cardNumber = '';
+            let cardExpiry = ''; 
+            let cardCVV = '';
+
+            if (paymentMethod === 'Net Banking') {
+                bankName = document.getElementById('bankName').value;
+            } else if (paymentMethod === 'Credit Card' || paymentMethod === 'Debit Card') {
+                cardNumber = document.getElementById('cardNumber').value;
+                cardExpiry = document.getElementById('cardExpiry').value;
+                cardCVV = document.getElementById('cardCVV').value;
+            }
+
+            console.log('Billing Information');
+            console.log('Customer Name:', customerName);
+            console.log('Email:', email);
+            console.log('Car Model:', carModel);
+            console.log('Rental Days:', rentalDays);
+            console.log('Rate per Day:', ratePerDay);
+            console.log('Total Amount:', totalAmount);
+            console.log('Payment Method:', paymentMethod);
+            if (bankName) {
+                console.log('Bank Name:', bankName);
+            }
+            if (cardNumber && cardExpiry && cardCVV) {
+                console.log('Card Number:', cardNumber);
+                console.log('Card Expiry:', cardExpiry);
+                console.log('Card CVV:', cardCVV);
+            }
+
+            // Redirect to another webpage after form submission
+            window.location.href = 'after payment.html'; // Replace with your target URL
+        });
+
+        document.querySelectorAll('input[name="paymentMethod"]').forEach((elem) => {
+            elem.addEventListener("change", function(event) {
+                var item = event.target.value;
+                if (item === "Net Banking") {
+                    document.getElementById("netBankingOptions").style.display = "block";
+                    document.getElementById("cardDetails").style.display = "none";
+                } else if (item === "Credit Card" || item === "Debit Card") {
+                    document.getElementById("cardDetails").style.display = "block";
+                    document.getElementById("netBankingOptions").style.display = "none";
+                } else {
+                    document.getElementById("netBankingOptions").style.display = "none";
+                    document.getElementById("cardDetails").style.display = "none";
+                }
+            });
+        });
+    </script>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
